@@ -3,7 +3,13 @@
 ___
 
 #### High level description of the project
-(Include the purpose of the project)
+We plan to build a desktop Sudoku application that can random generate sudoku board based on the difficulty selected by the player and suggest next moves as per player’s request. This project idea is subject to change.
+
+The work breakdown below is subject to change.
+Jinhuang: GUI development;
+Qianfan: Sudoku board generation;
+Qixiu: Suggestion mechanism.
+
 
 #### Project Value
 (What kind of value the project brings)
