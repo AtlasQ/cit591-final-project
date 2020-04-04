@@ -1,0 +1,7 @@
+/**
+ * Number
+ */
+public class Number {
+
+    
+}

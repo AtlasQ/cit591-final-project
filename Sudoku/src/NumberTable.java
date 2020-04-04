@@ -1,0 +1,7 @@
+/**
+ * NumberTable
+ */
+public class NumberTable {
+
+    
+}

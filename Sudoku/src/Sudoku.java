@@ -1,0 +1,7 @@
+/**
+ * Sudoku
+ */
+public class Sudoku {
+
+    
+}

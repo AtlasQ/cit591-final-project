@@ -1,0 +1,7 @@
+/**
+ * NewGameCreator
+ */
+public class NewGameCreator {
+
+    
+}

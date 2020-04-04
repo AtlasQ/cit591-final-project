@@ -1,0 +1,7 @@
+/**
+ * InputReader
+ */
+public class InputReader {
+
+    
+}

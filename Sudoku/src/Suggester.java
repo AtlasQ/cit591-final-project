@@ -1,0 +1,7 @@
+/**
+ * Suggester
+ */
+public class Suggester {
+
+    
+}
