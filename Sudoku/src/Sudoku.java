@@ -1,7 +1,0 @@
-/**
- * Sudoku
- */
-public class Sudoku {
-
-
-}
