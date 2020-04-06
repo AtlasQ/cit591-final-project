@@ -3,5 +3,5 @@
  */
 public class Sudoku {
 
-    public newGame
+
 }
