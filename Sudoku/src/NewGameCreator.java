@@ -14,12 +14,16 @@ public class NewGameCreator {
 	private String answerS;
 	
 	
-	public void setGameSeed() {
+	// class to random a seed
+	public void setRandomGameSeed() {
 		Random r = new Random();
 		gameSeed = r.nextInt(1000);
 	}
 	
-
+	// class to set a seed you want, this is for test use only
+	public void setGameSeed(int i) {
+		gameSeed = i;
+	}
 	
 	// this will set puzzleS to the number of gameSeed line of puzzle.csv
 	public void setPuzzleS() {
@@ -71,7 +75,7 @@ public class NewGameCreator {
     
 	public static void main(String[] args) {
 //		NewGameCreator nGC = new NewGameCreator();
-//		nGC.setGameSeed();
+//		nGC.setRandomGameSeed();
 //		nGC.setPuzzleS();
 //		nGC.setAnswerS();
 //		System.out.println(nGC.getPuzzleS());
