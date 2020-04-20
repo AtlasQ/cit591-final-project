@@ -5,7 +5,7 @@ public class Sudoku {
 		
 	public void newGame(){
 		// Set game seed
-		nGC.setGameSeed();
+		nGC.setRandomGameSeed();
 		// Read sudoku csv files
 		nGC.setPuzzleS();
 		nGC.setAnswerS();

@@ -1,7 +1,0 @@
-/**
- * Validator
- */
-public class Validator {
-
-    
-}

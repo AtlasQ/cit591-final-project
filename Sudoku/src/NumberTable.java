@@ -49,6 +49,13 @@ public class NumberTable {
 		return puzzle;
 	}
 
+	// setter to put user's input into puzzle matrix
+	public void setPuzzle(int value, int rowNum, int colNum) {
+		// user must input a valid number and position, we won't add the feature here, but we'll create a try-catch when asking for input
+		Number n = new Number(value, false);
+		puzzle[rowNum][colNum] = n;
+	}
+	
 	// getter for answer matrix
 	public Number[][] getAnswer() {
 		return answer;
