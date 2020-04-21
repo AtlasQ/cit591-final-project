@@ -12,12 +12,18 @@ public class InputReader {
         while (!flag) {
             Scanner in = new Scanner(System.in);
             if (in.hasNextInt()) {
-
                 input = in.nextInt();
-                flag = true;
+
+                if (input >= 0 && input < 10) {
+
+                    flag = true;
+                } else {
+                    System.out.println("Please enter a valid number!");
+                }
+
             } else {
                 System.out.println("Please enter a valid number!");
-
+s
             }
         }
         return input;
