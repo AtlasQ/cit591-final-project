@@ -14,11 +14,24 @@ public class NumberTable {
 	 * @param answerStr
 	 */
 	public NumberTable(String puzzleStr, String answerStr) {
-		for (int i = 0; i <= 8; i++) {
-			for (int j = 0; j <= 8; j++) {
-
+		for (int row = 0; row <= 8; row++) {
+			for (int col = 0; col <= 8; col++) {
+				int rowCompensation = 0;
+				switch (row / 3) {
+					case 0:
+						rowCompensation = 0;
+						break;
+					case 1:
+						rowCompensation = 2;
+						break;
+					case 2:
+						rowCompensation = 4;
+						break;
+				}
+				// box id
+				int box = (row / 3) + (col / 3) + rowCompensation;
 				// current substring for puzzleStr
-				String subP = puzzleStr.substring(i * 9 + j, i * 9 + j + 1);
+				String subP = puzzleStr.substring(row * 9 + col, row * 9 + col + 1);
 
 				// boolean to say if current number is original or user input.
 				boolean orig = false;
@@ -27,19 +40,19 @@ public class NumberTable {
 				}
 
 				// Number class for current puzzle number
-				Number puzzleN = new Number(Integer.parseInt(subP), orig);
+				Number puzzleN = new Number(Integer.parseInt(subP), orig, row, col, box);
 
 				// Save current puzzle Number to our 2-dimensional array puzzle
-				this.puzzle[i][j] = puzzleN;
+				this.puzzle[row][col] = puzzleN;
 
 				// current substring for answerStr
-				String subA = answerStr.substring(i * 9 + j, i * 9 + j + 1);
+				String subA = answerStr.substring(row * 9 + col, row * 9 + col + 1);
 
 				// Number class for current answer number
-				Number answerN = new Number(Integer.parseInt(subA), orig);
+				Number answerN = new Number(Integer.parseInt(subA), orig, row, col, box);
 
 				// Save current puzzle Number to our 2-dimensional array puzzle
-				this.answer[i][j] = answerN;
+				this.answer[row][col] = answerN;
 			}
 		}
 	}
@@ -51,8 +64,23 @@ public class NumberTable {
 
 	// setter to put user's input into puzzle matrix
 	public void setPuzzle(int value, int rowNum, int colNum) {
+		int rowCompensation = 0;
+		switch (rowNum / 3) {
+			case 0:
+				rowCompensation = 0;
+				break;
+			case 1:
+				rowCompensation = 2;
+				break;
+			case 2:
+				rowCompensation = 4;
+				break;
+		}
+		// box id
+		int boxNum = (rowNum / 3) + (colNum / 3) + rowCompensation;
+
 		// user must input a valid number and position, we won't add the feature here, but we'll create a try-catch when asking for input
-		Number n = new Number(value, false);
+		Number n = new Number(value, false, rowNum, colNum, boxNum);
 		puzzle[rowNum][colNum] = n;
 	}
 	
