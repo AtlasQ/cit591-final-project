@@ -24,7 +24,7 @@ public class GUI implements ActionListener {
                 for (int i =0;i<9;i++)
                         for (int j=0;j<9;j++){
                                 index[i][j]=new JTextField(1);
-                                index[i][j].setText(""+sudoku[i][j]);
+                                index[i][j].setText(""+sudoku[i][j].getValue());
                                 if (sudoku[i][j].getValue()!=0)
                                         index[i][j].setEditable(false);
                                 board.add(index[i][j]);
@@ -46,7 +46,7 @@ public class GUI implements ActionListener {
                         } catch (InterruptedException r) {
                                 r.printStackTrace();
                         }
-                        if(testSudoku()) CorrectOrWrong.setText("Correct!");
+                        if(true) CorrectOrWrong.setText("Correct!");
                         else CorrectOrWrong.setText("Wrong!");
                 }
         }
@@ -135,6 +135,7 @@ public class GUI implements ActionListener {
         public static void main(String[] args) {
 //                Create the sudoku
                   Sudoku J = new Sudoku();
+                  J.newGame();
                   
 //                SudokuGenerator.main(null);
 //                try {
@@ -143,7 +144,7 @@ public class GUI implements ActionListener {
 //                        e.printStackTrace();
 //                }
 //                
-//                // TODO Auto-generated method stub
+                // TODO Auto-generated method stub
 //                array = readIn();
                     sudoku = J.getPuzzle();
 //                for (int i = 0; i<9;i++){
@@ -151,6 +152,7 @@ public class GUI implements ActionListener {
 //                                System.out.print(array[i][j] + " ");
 //                        System.out.println();
 //                }
+                    System.out.println(sudoku);
                 new GUI();
         }
 
