@@ -46,6 +46,7 @@ public class GUI implements ActionListener {
                         } catch (InterruptedException r) {
                                 r.printStackTrace();
                         }
+                        
                         if(true) CorrectOrWrong.setText("Correct!");
                         else CorrectOrWrong.setText("Wrong!");
                 }
