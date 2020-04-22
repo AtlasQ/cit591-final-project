@@ -1,11 +1,9 @@
-import java.util.Arrays;
-
 /**
  * Validator
  */
 public class Validator {
 	
-	// create 3 boolean to save whether row, col or sq is valid
+	// create 3 boolean to save whether row, column or square is valid
 	private boolean rowValid = false;
 	private boolean colValid = false;
 	private boolean sqValid = false;
@@ -29,12 +27,12 @@ public class Validator {
     	// initialize boolean variable for result
     	boolean res = false;
     	
-    	// temp variance to store number of trues, if 0, 
+    	// temperate variance to store number of trues, if 0, 
     	int rowSum = 0;
     	int colSum = 0;
     	int sqSum = 0;
     	
-    	// row and col can be tested together
+    	// row and column can be tested together
     	for (int i = 0; i <= 8; i ++) {
     		int rowValue = nt.getPuzzle()[rowNum][i].getValue();
     		int colValue = nt.getPuzzle()[i][colNum].getValue();
@@ -50,10 +48,10 @@ public class Validator {
     	// we divide the table into 9 chunks, first let's find out which row chunk are we in
     	// for example, rowNum = 2, then colChunk = 0, which means the number is in the top row chunk
     	int rowChunk = rowNum / 3;
-    	// for example, if colNum = 8, then colChunk = 2, which means the number is in the right col chunk
+    	// for example, if colNum = 8, then colChunk = 2, which means the number is in the right column chunk
     	int colChunk = colNum / 3;
     	
-    	// chunk num time 3 will be the the start of the index, time 3 plus 2 will be the end of the index
+    	// chunk number time 3 will be the the start of the index, time 3 plus 2 will be the end of the index
     	for (int i = rowChunk * 3; i <= rowChunk * 3 + 2; i++){
     		for (int j = colChunk * 3; j <= colChunk * 3 + 2; j++){
     			int sqValue = nt.getPuzzle()[i][j].getValue();
