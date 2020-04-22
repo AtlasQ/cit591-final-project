@@ -18,10 +18,13 @@ public class GUI implements ActionListener {
         
         public GUI (){
       
-                JFrame frame = new JFrame("Sudoku");
+                JFrame frame = new JFrame("Sudoku by Jin, QianFan, Atlas");
                 //frame.getContentPane().add(draw);
                 frame.setSize(500,500);
                 submit.addActionListener(this);
+                Color color=new Color(255,0,0);
+                
+                
                 //Hint.addActionListener(this);
                 JPanel board = new JPanel();
                 JPanel panel = new JPanel();
@@ -29,14 +32,22 @@ public class GUI implements ActionListener {
                 for (int i =0;i<9;i++)
                         for (int j=0;j<9;j++){
                                 index[i][j]=new JTextField(1);
-                                index[i][j].setText(""+sudoku[i][j].getValue());
-                                if (sudoku[i][j].getValue()!=0)
-                                        index[i][j].setEditable(false);
+                                if(sudoku[i][j].getValue() == 0){
+                                    index[i][j].setText(" ");
+                                }
+                                else {
+                                index[i][j].setText(""+sudoku[i][j].getValue());}
+                                if (sudoku[i][j].getValue()!= 0) {
+                                        index[i][j].setEditable(false);}
+                                else {
+                                index[i][j].setForeground(color);}
                                 board.add(index[i][j]);
                         }
                 frame.getContentPane().add(board);
                 frame.getContentPane().add(submit,"South");
                 frame.getContentPane().add(CorrectOrWrong, "North");
+                frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+           
                 //frame.getContentPane().add(Hint, "East");
             frame.setVisible(true);
         }
@@ -172,13 +183,13 @@ public class GUI implements ActionListener {
                 sample = J.getNt();
                
                   
-//                SudokuGenerator.main(null);
+////                SudokuGenerator.main(null);
 //                try {
 //                        Thread.sleep(3000);
 //                } catch (InterruptedException e) {
 //                        e.printStackTrace();
 //                }
-//                
+                
                 // TODO Auto-generated method stub
 //                array = readIn();
               
@@ -189,6 +200,8 @@ public class GUI implements ActionListener {
 //                }
                     
                 new GUI();
+               
+         
         }
 
 }
