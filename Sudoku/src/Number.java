@@ -3,6 +3,9 @@ public class Number {
 
 	private int value;
 	private boolean orig;
+	private int colID;
+	private int rowID;
+	private int boxID;
 	private boolean rowComplience;
 	private boolean colComplience;
 	private boolean boxComplience;
@@ -14,9 +17,12 @@ public class Number {
 	 * @param init
 	 * boolean variable state whether this number is original number or user input number
 	 */
-	public Number(int value, boolean orig) {
+	public Number(int value, boolean orig, int colID, int rowID, int boxID) {
 		this.value = value;
 		this.orig = orig;
+		this.colID = colID;
+		this.rowID = rowID;
+		this.boxID = boxID;
 		this.rowComplience = true;
 		this.colComplience = true;
 		this.boxComplience = true;
@@ -26,16 +32,37 @@ public class Number {
 	 * Getter to get number value
 	 */
 	public int getValue() {
-		return value;
+		return this.value;
 	}
 	
 	/*
 	 * Getter to get orig
 	 */
 	public boolean getOrig() {
-		return orig;
+		return this.orig;
 	}
 	
+
+	/*
+	 * Getter to get number value
+	 */
+	public int getColID() {
+		return this.colID;
+	}
+
+	/*
+	 * Getter to get orig
+	 */
+	public int getRowID() {
+		return this.rowID;
+	}
+
+	/*
+	 * Getter to get orig
+	 */
+	public int getBoxID() {
+		return this.boxID;
+	}
 
 
 	/*
@@ -61,7 +88,7 @@ public class Number {
 	
 	public static void main(String[] args) {
 		// test
-		Number nm = new Number(9, true);
+		Number nm = new Number(9, true, 1, 1, 1);
 		System.out.println(nm.getValue());
 		System.out.println(nm.getOrig());
 		System.out.println(nm.getRowComplience());
