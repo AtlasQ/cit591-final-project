@@ -1,10 +1,13 @@
 
 public class Sudoku {
 
+    
+
     // call NewGameCreator class
     NewGameCreator nGC = new NewGameCreator();
     private Number[][] puzzle;
     private Number[][] answer;
+    private NumberTable nt;
 
     public void newGame() {
         // Set game seed
@@ -14,7 +17,7 @@ public class Sudoku {
         nGC.setAnswerS();
         String puzzleS = nGC.getPuzzleS();
         String answerS = nGC.getAnswerS();
-        NumberTable nt = new NumberTable(puzzleS, answerS);
+        nt = new NumberTable(puzzleS, answerS);
         puzzle = nt.getPuzzle();
         answer = nt.getAnswer();
     }
@@ -25,6 +28,9 @@ public class Sudoku {
 
     public Number[][] getPuzzle() {
         return puzzle;
+    }
+    public NumberTable getNt() {
+        return nt;
     }
 
 }
