@@ -5,19 +5,24 @@ import javax.swing.*;
 import java.lang.*;
 
 public class GUI implements ActionListener {
+    
         
         
         JButton submit = new JButton("Submit");
         JLabel CorrectOrWrong = new JLabel("---");
+        //JButton Hint = new JButton("Click me for Hint");
         private static int[][] array;
         private static Number[][] sudoku;
+        private static NumberTable sample;
         private static JTextField[][] index = new JTextField[9][9];
         
         public GUI (){
+      
                 JFrame frame = new JFrame("Sudoku");
                 //frame.getContentPane().add(draw);
                 frame.setSize(500,500);
                 submit.addActionListener(this);
+                //Hint.addActionListener(this);
                 JPanel board = new JPanel();
                 JPanel panel = new JPanel();
                 board.setLayout(new GridLayout (9,9));
@@ -32,6 +37,7 @@ public class GUI implements ActionListener {
                 frame.getContentPane().add(board);
                 frame.getContentPane().add(submit,"South");
                 frame.getContentPane().add(CorrectOrWrong, "North");
+                //frame.getContentPane().add(Hint, "East");
             frame.setVisible(true);
         }
         
@@ -47,16 +53,41 @@ public class GUI implements ActionListener {
                                 r.printStackTrace();
                         }
                         
-                        if(true) CorrectOrWrong.setText("Correct!");
+                        if(testSudoku(sample, temp)) CorrectOrWrong.setText("Correct!");
                         else CorrectOrWrong.setText("Wrong!");
+
                 }
+//                if (e.getSource() == Hint)
+//                {
+//                        int[][] temp = submit();
+//                        write(temp);
+//                        try {
+//                                Thread.sleep(2000);
+//                        } catch (InterruptedException r) {
+//                                r.printStackTrace();
+//                        }
+//                        
+//                        Hint.setText("5");
+//
+//                }
         }
 //        
 //       
-//        public boolean testSudoku() {
-//            
-//                return SudokuChecker.main(null);
-//        }
+        public boolean testSudoku(NumberTable J, int[][] Result) {
+            Validator K = new Validator();
+            boolean flag = false;
+            for (int i =0;i<9;i++)
+                for (int j=0;j<9;j++){
+                    if(K.isCorrect(Result[i][j], i, j, J )) {
+                        flag = true;
+                    }
+                    else { 
+                        flag = false;
+                    }
+                    
+                }
+            return flag;
+        }
         
 //        Submit the text field (User input)
         
@@ -135,8 +166,11 @@ public class GUI implements ActionListener {
         
         public static void main(String[] args) {
 //                Create the sudoku
-                  Sudoku J = new Sudoku();
-                  J.newGame();
+                Sudoku J = new Sudoku();
+                J.newGame();
+                sudoku = J.getPuzzle();
+                sample = J.getNt();
+               
                   
 //                SudokuGenerator.main(null);
 //                try {
@@ -147,13 +181,13 @@ public class GUI implements ActionListener {
 //                
                 // TODO Auto-generated method stub
 //                array = readIn();
-                    sudoku = J.getPuzzle();
+              
 //                for (int i = 0; i<9;i++){
 //                        for (int j=0;j<9;j++)
 //                                System.out.print(array[i][j] + " ");
 //                        System.out.println();
 //                }
-                    System.out.println(sudoku);
+                    
                 new GUI();
         }
 
