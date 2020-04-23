@@ -23,7 +23,6 @@ public class InputReader {
 
             } else {
                 System.out.println("Please enter a valid number!");
-s
             }
         }
         return input;
