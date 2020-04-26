@@ -332,8 +332,7 @@ public class Sudoku extends JFrame implements KeyListener {
                 });
                 button.setRowID(rowID);
                 button.setColID(colID);
-                this.boxIDGlobal= HelperFunction.calculateBoxID(rowID, colID);
-                button.setBoxID(this.boxIDGlobal);
+                button.setBoxID(HelperFunction.calculateBoxID(rowID, colID));
                 this.buttonTable[rowID][colID] = button;
                 buttonGroup.add(button);
                 buttonPanel.add(button);
