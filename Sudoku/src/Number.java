@@ -115,15 +115,5 @@ public class Number {
 			return false;
 		}
 	}
-
-	public static void main(String[] args) {
-		// test
-		Number nm = new Number(9, true, 1, 1, 1);
-		System.out.println(nm.getValue());
-		System.out.println(nm.getOrig());
-		System.out.println(nm.getRowComplience());
-		System.out.println(nm.getColComplience());
-		System.out.println(nm.getBoxComplience());
-	}
 }
 
