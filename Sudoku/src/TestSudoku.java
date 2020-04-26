@@ -14,22 +14,39 @@ public class TestSudoku extends JFrame implements KeyListener {
     private int colIDGlobal;
     private int boxIDGlobal;
     
+    private static boolean isInteger(String s) {
+        try {
+            Integer.parseInt(s);
+        } catch (NumberFormatException e) {
+            return false;
+        } catch (NullPointerException e) {
+            return false;
+        }
+        // only got here if we didn't return false
+        return true;
+    }
+
     @Override
     public void keyTyped(KeyEvent e) {
         // Locate the selected cell (toggled toggle button)
+        String text = String.valueOf(e.getKeyChar());
+        int keyCode = e.getKeyChar();
         for (int rowID = 0; rowID < 9; rowID++) {
             for (int colID = 0; colID < 9; colID++) {
                 ExtendedJToggleButton button = buttonTable[rowID][colID];
-                if (button.isSelected()) {
-                    // Change button text
-                    button.setText(String.valueOf(e.getKeyChar()));
-
+                if (button.isSelected() && ! this.numberTable.getPuzzle()[rowID][colID].getOrig()) {
+                    if (isInteger(text)){
+                        // Change button text
+                        button.setText(text);
+                        button.setForeground(Color.decode("#4a90e2"));
+                    } else if ((keyCode == 8) || (keyCode == 127)) {
+                        // Change button text
+                        button.setText("");
+                        button.setForeground(Color.WHITE);
+                    }
                 }
             }
         }
-        System.out.println(this.rowIDGlobal);
-        System.out.println(this.colIDGlobal);
-        System.out.println(this.boxIDGlobal);
     }
 
     @Override
@@ -42,7 +59,7 @@ public class TestSudoku extends JFrame implements KeyListener {
         // pass
     }
 
-    private void changeColor() {
+    private void selectChangeColor() {
         for (int rowID = 0; rowID < 9; rowID++) {
             for (int colID = 0; colID < 9; colID++) {
                 int rowCompensation = 0;
@@ -60,6 +77,7 @@ public class TestSudoku extends JFrame implements KeyListener {
                 // Get box id
                 int boxID= (rowID / 3) + (colID / 3) + rowCompensation;
                 ExtendedJToggleButton button = buttonTable[rowID][colID];
+                // Set row, column and box color
                 if ((rowID == this.rowIDGlobal) || (colID == this.colIDGlobal) || (boxID == this.boxIDGlobal)){
                     button.setBackground(Color.decode("#e2e7ed"));
                 } else {
@@ -70,8 +88,9 @@ public class TestSudoku extends JFrame implements KeyListener {
         }
     }
     
-    private void drawButtons(ButtonGroup buttonGroup, JPanel buttonPanel, String text) {
-        // 
+    private void drawButtons(ButtonGroup buttonGroup, JPanel buttonPanel) {
+        // Get puzzel from numberTable
+        Number[][] puzzel = numberTable.getPuzzle();
         // Draw buttons
         for (int rowID = 0; rowID < 9; rowID++) {
             for (int colID = 0; colID < 9; colID++) {
@@ -94,8 +113,12 @@ public class TestSudoku extends JFrame implements KeyListener {
                     borderR = 2;
                 }
 
-                
-                button.setText(Integer.toString(rowID) + Integer.toString(colID) + text);
+                String text = "";
+                int puzzelNumber = puzzel[rowID][colID].getValue();
+                if (puzzelNumber != 0) {
+                    text = Integer.toString(puzzelNumber);
+                }
+                button.setText(text);
                 button.setBorder(BorderFactory.createMatteBorder(borderT, borderL, borderB, borderR, Color.DARK_GRAY));
                 button.setBackground(Color.WHITE);
                 button.addKeyListener(this);
@@ -104,7 +127,7 @@ public class TestSudoku extends JFrame implements KeyListener {
                         rowIDGlobal = button.getRowID();
                         colIDGlobal = button.getColID();
                         boxIDGlobal = button.getBoxID();
-                        changeColor();
+                        selectChangeColor();
                     }
                 });
                 button.setRowID(rowID);
@@ -138,7 +161,7 @@ public class TestSudoku extends JFrame implements KeyListener {
         this.numberTable = numberTable;
         // Creat the Frame
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(900, 900);
+        this.setSize(600, 600);
         // try {
         //     // Set System L&F
         //     UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -173,7 +196,7 @@ public class TestSudoku extends JFrame implements KeyListener {
 
         // Create buttonGroup for Sudoku grid
         buttonPanel.setLayout(new GridLayout (9,9));
-        drawButtons(buttonGroup, buttonPanel, "default");
+        drawButtons(buttonGroup, buttonPanel);
 
         // Creating the panel at bottom and adding components
         JPanel panel = new JPanel(); 
@@ -191,6 +214,7 @@ public class TestSudoku extends JFrame implements KeyListener {
         this.getContentPane().add(BorderLayout.NORTH, menu);
         this.getContentPane().add(BorderLayout.CENTER, buttonPanel);
         this.setVisible(true);
+        this.setResizable(false);
     }
 
 

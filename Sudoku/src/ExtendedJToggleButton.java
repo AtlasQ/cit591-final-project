@@ -36,9 +36,9 @@ public class ExtendedJToggleButton extends JToggleButton  {
         this.boxID = boxID;
     }
     
-public static void main(String[] args) {
-    ExtendedJToggleButton etb = new ExtendedJToggleButton();
-    etb.setRowID(1);
-    System.out.println(etb.getRowID());
-}
+    public static void main(String[] args) {
+        ExtendedJToggleButton etb = new ExtendedJToggleButton();
+        etb.setRowID(1);
+        System.out.println(etb.getRowID());
+    }
 }

@@ -261,7 +261,6 @@ public class Test extends JFrame implements KeyListener {
                 gbc.gridwidth = 1;
                 gap = 0;
 
-                System.out.println(key);
                 btn.setBackground(Color.WHITE);
                 map.put(getKeyCode(key), btn);
             }

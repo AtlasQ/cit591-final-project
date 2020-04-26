@@ -5,7 +5,6 @@ public class NumberTable {
 
 	private Number[][] puzzle = new Number[9][9];
 	private Number[][] answer = new Number[9][9];
-
 	/**
 	 * Constructor to save puzzle string and answer string read from .csv files
 	 * to 2-dimensional array
@@ -63,25 +62,8 @@ public class NumberTable {
 	}
 
 	// setter to put user's input into puzzle matrix
-	public void setPuzzle(int value, int rowNum, int colNum) {
-		int rowCompensation = 0;
-		switch (rowNum / 3) {
-			case 0:
-				rowCompensation = 0;
-				break;
-			case 1:
-				rowCompensation = 2;
-				break;
-			case 2:
-				rowCompensation = 4;
-				break;
-		}
-		// box id
-		int boxNum = (rowNum / 3) + (colNum / 3) + rowCompensation;
-
-		// user must input a valid number and position, we won't add the feature here, but we'll create a try-catch when asking for input
-		Number n = new Number(value, false, rowNum, colNum, boxNum);
-		puzzle[rowNum][colNum] = n;
+	public void setPuzzle(Number number) {
+		puzzle[number.getRowID()][number.getColID()] = number;
 	}
 	
 	// getter for answer matrix
@@ -89,32 +71,57 @@ public class NumberTable {
 		return answer;
 	}
 
-	public static void main(String[] args) {
-//		NewGameCreator nGC = new NewGameCreator();
-//		nGC.setPuzzleS();
-//		nGC.setAnswerS();
-//		String puzzleS = nGC.getPuzzleS();
-//		String answerS = nGC.getAnswerS();
-//
-//		NumberTable nt = new NumberTable(puzzleS, answerS);
-//
-//		Number[][] puzzle = nt.getPuzzle();
-//		Number[][] answer = nt.getAnswer();
-//
-//		System.out.println(puzzleS);
-//		for (int i = 0; i <= 8; i++) {
-//			for (int j = 0; j <= 8; j++) {
-//				System.out.println(puzzle[i][j].getValue());
-//				System.out.println(puzzle[i][j].getOrig());
-//			}
-//		}
-//
-//		System.out.println(answerS);
-//		for (int i = 0; i <= 8; i++) {
-//			for (int j = 0; j <= 8; j++) {
-//				System.out.println(answer[i][j].getValue());
-//				System.out.println(answer[i][j].getOrig());
-//			}
-//		}
+	public void ifMistake(Number number) {
+		// initialize boolean variable
+		boolean res = false;
+		// right number from answer table
+		int reference = this.answer[number.getRowID()][number.getColID()].getValue();
+		if (number.getValue() == reference) {
+			res = true;
+		} else {
+			res = false;
+		}
+		number.setIfCorrect(res);
+		setPuzzle(number);
+	}
+
+	public void ifValid(Number number) {
+		int rowInvalid = 0;
+		int colInvalid = 0;
+		int boxInvalid = 0;
+		for (int i = 0; i < 9; i++) {
+			Number rowValue = this.puzzle[number.getRowID()][i];
+			Number colValue = this.puzzle[i][number.getColID()];
+			if ((number.getValue() == rowValue.getValue()) && (!number.sameLocation(rowValue))) {
+				number.setRowComplience(false);
+				setPuzzle(number);
+				rowInvalid++;
+			}
+			if ((number.getValue() == colValue.getValue()) && (!number.sameLocation(colValue))) {
+				number.setColComplience(false);
+				setPuzzle(number);
+				colInvalid++;
+			}
+			for (int j = 0; j < 9; j++) {
+				Number boxValue = this.puzzle[i][j];
+				if ((!number.sameLocation(boxValue)) && (number.getBoxID() == boxValue.getBoxID()) && (number.getValue() == boxValue.getValue())) {
+					number.setBoxComplience(false);
+					setPuzzle(number);
+					boxInvalid++;
+				}
+			}
+		}
+		if (rowInvalid == 0) {
+			number.setRowComplience(true);
+			setPuzzle(number);
+		}
+		if (colInvalid == 0) {
+			number.setColComplience(true);
+			setPuzzle(number);
+		}
+		if (boxInvalid == 0) {
+			number.setBoxComplience(true);
+			setPuzzle(number);
+		}
 	}
 }

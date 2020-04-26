@@ -9,6 +9,7 @@ public class Number {
 	private boolean rowComplience;
 	private boolean colComplience;
 	private boolean boxComplience;
+	private boolean ifCorrect;
 	/**
 	 * Number constructor
 	 * @param value
@@ -26,65 +27,95 @@ public class Number {
 		this.rowComplience = true;
 		this.colComplience = true;
 		this.boxComplience = true;
+		this.ifCorrect = true;
 	}
 	
-	/*
-	 * Getter to get number value
-	 */
+
 	public int getValue() {
 		return this.value;
 	}
-	
-	/*
-	 * Getter to get orig
-	 */
+
+	public void setValue(int value) {
+		this.value = value;
+	}
+
+
 	public boolean getOrig() {
 		return this.orig;
 	}
-	
-	/*
-	 * Getter to get orig
-	 */
+
+	public void setOrig(boolean orig) {
+		this.orig = orig;
+	}
+
 	public int getRowID() {
 		return this.rowID;
 	}
 
-	/*
-	 * Getter to get number value
-	 */
+	public void setRowID(int rowID) {
+		this.rowID = rowID;
+	}
+
 	public int getColID() {
 		return this.colID;
 	}
 
-	/*
-	 * Getter to get orig
-	 */
+	public void setColID(int colID) {
+		this.colID = colID;
+	}
+
 	public int getBoxID() {
 		return this.boxID;
 	}
 
+	public void setBoxID(int boxID) {
+		this.boxID = boxID;
+	}
 
-	/*
-	 * Getter to get rowComplience
-	 */
+
 	public boolean getRowComplience() {
-		return rowComplience;
+		return this.rowComplience;
 	}
 
-	/*
-	 * Getter to get colComplience
-	 */
+	public void setRowComplience(boolean rowComplience) {
+		this.rowComplience = rowComplience;
+	}
+
+
 	public boolean getColComplience() {
-		return colComplience;
+		return this.colComplience;
 	}
 
-	/*
-	 * Getter to get boxComplience
-	 */
-	public boolean getBoxComplience() {
-		return boxComplience;
+	public void setColComplience(boolean colComplience) {
+		this.colComplience = colComplience;
 	}
-	
+
+
+	public boolean getBoxComplience() {
+		return this.boxComplience;
+	}
+
+	public void setBoxComplience(boolean boxComplience) {
+		this.boxComplience = boxComplience;
+	}
+
+
+	public boolean getIfCorrect() {
+		return this.ifCorrect;
+	}
+
+	public void setIfCorrect(boolean ifCorrect) {
+		this.ifCorrect = ifCorrect;
+	}
+
+	public boolean sameLocation(Number number) {
+		if ((this.rowID == number.getRowID()) && (this.colID == number.getColID()) && (this.boxID == number.getBoxID())) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	public static void main(String[] args) {
 		// test
 		Number nm = new Number(9, true, 1, 1, 1);
