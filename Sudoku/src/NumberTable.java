@@ -73,55 +73,119 @@ public class NumberTable {
 
 	public void ifMistake(Number number) {
 		// initialize boolean variable
-		boolean res = false;
+		int res = 0;
 		// right number from answer table
 		int reference = this.answer[number.getRowID()][number.getColID()].getValue();
-		if (number.getValue() == reference) {
-			res = true;
-		} else {
-			res = false;
+		if ((number.getValue() != reference) && (number.getValue() != 0)) {
+			res++;
 		}
 		number.setIfCorrect(res);
 		setPuzzle(number);
+	}
+
+	public void undoIfMistake(Number number) {
+		if (number.getValue() != 0) {
+			number.setIfCorrect(0);
+			setPuzzle(number);
+		}
 	}
 
 	public void ifValid(Number number) {
 		int rowInvalid = 0;
 		int colInvalid = 0;
 		int boxInvalid = 0;
-		for (int i = 0; i < 9; i++) {
-			Number rowValue = this.puzzle[number.getRowID()][i];
-			Number colValue = this.puzzle[i][number.getColID()];
-			if ((number.getValue() == rowValue.getValue()) && (!number.sameLocation(rowValue))) {
-				number.setRowComplience(false);
-				setPuzzle(number);
-				rowInvalid++;
-			}
-			if ((number.getValue() == colValue.getValue()) && (!number.sameLocation(colValue))) {
-				number.setColComplience(false);
-				setPuzzle(number);
-				colInvalid++;
-			}
-			for (int j = 0; j < 9; j++) {
-				Number boxValue = this.puzzle[i][j];
-				if ((!number.sameLocation(boxValue)) && (number.getBoxID() == boxValue.getBoxID()) && (number.getValue() == boxValue.getValue())) {
-					number.setBoxComplience(false);
+		if (number.getValue() != 0) {
+			for (int i = 0; i < 9; i++) {
+				Number rowValue = this.puzzle[number.getRowID()][i];
+				Number colValue = this.puzzle[i][number.getColID()];
+				if ((number.getValue() == rowValue.getValue()) && (!number.sameLocation(rowValue))) {
+					number.setRowComplience(number.getRowComplience() + 1);
+					rowValue.setRowComplience(rowValue.getRowComplience() + 1);
 					setPuzzle(number);
-					boxInvalid++;
+					setPuzzle(rowValue);
+					rowInvalid++;
+				}
+				if ((number.getValue() == colValue.getValue()) && (!number.sameLocation(colValue))) {
+					number.setColComplience(number.getColComplience() + 1);
+					colValue.setColComplience(colValue.getColComplience() + 1);
+					setPuzzle(number);
+					setPuzzle(colValue);
+					colInvalid++;
+				}
+				for (int j = 0; j < 9; j++) {
+					Number boxValue = this.puzzle[i][j];
+					if ((!number.sameLocation(boxValue)) && (number.getBoxID() == boxValue.getBoxID())
+							&& (number.getValue() == boxValue.getValue())) {
+						number.setBoxComplience(number.getBoxComplience() + 1);
+						boxValue.setBoxComplience(boxValue.getBoxComplience() + 1);
+						setPuzzle(number);
+						setPuzzle(boxValue);
+						boxInvalid++;
+					}
 				}
 			}
+			if (rowInvalid == 0) {
+				number.setRowComplience(0);
+				setPuzzle(number);
+			}
+			if (colInvalid == 0) {
+				number.setColComplience(0);
+				setPuzzle(number);
+			}
+			if (boxInvalid == 0) {
+				number.setBoxComplience(0);
+				setPuzzle(number);
+			}
 		}
-		if (rowInvalid == 0) {
-			number.setRowComplience(true);
-			setPuzzle(number);
-		}
-		if (colInvalid == 0) {
-			number.setColComplience(true);
-			setPuzzle(number);
-		}
-		if (boxInvalid == 0) {
-			number.setBoxComplience(true);
-			setPuzzle(number);
+		
+	}
+
+	public void undoIfValid(Number number) {
+		int rowInvalid = 0;
+		int colInvalid = 0;
+		int boxInvalid = 0;
+		if (number.getValue() != 0) {
+			for (int i = 0; i < 9; i++) {
+				Number rowValue = this.puzzle[number.getRowID()][i];
+				Number colValue = this.puzzle[i][number.getColID()];
+				if ((number.getValue() == rowValue.getValue()) && (!number.sameLocation(rowValue))) {
+					number.setRowComplience(number.getRowComplience() - 1);
+					rowValue.setRowComplience(rowValue.getRowComplience() - 1);
+					setPuzzle(number);
+					setPuzzle(rowValue);
+					rowInvalid++;
+				}
+				if ((number.getValue() == colValue.getValue()) && (!number.sameLocation(colValue))) {
+					number.setColComplience(number.getColComplience() - 1);
+					colValue.setColComplience(colValue.getColComplience() - 1);
+					setPuzzle(number);
+					setPuzzle(colValue);
+					colInvalid++;
+				}
+				for (int j = 0; j < 9; j++) {
+					Number boxValue = this.puzzle[i][j];
+					if ((!number.sameLocation(boxValue)) && (number.getBoxID() == boxValue.getBoxID())
+							&& (number.getValue() == boxValue.getValue())) {
+						number.setBoxComplience(number.getBoxComplience() - 1);
+						boxValue.setBoxComplience(boxValue.getBoxComplience() - 1);
+						setPuzzle(number);
+						setPuzzle(boxValue);
+						boxInvalid++;
+					}
+				}
+			}
+			if (rowInvalid == 0) {
+				number.setRowComplience(0);
+				setPuzzle(number);
+			}
+			if (colInvalid == 0) {
+				number.setColComplience(0);
+				setPuzzle(number);
+			}
+			if (boxInvalid == 0) {
+				number.setBoxComplience(0);
+				setPuzzle(number);
+			}
 		}
 	}
 }

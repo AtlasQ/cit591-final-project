@@ -6,10 +6,10 @@ public class Number {
 	private int rowID;
 	private int colID;
 	private int boxID;
-	private boolean rowComplience;
-	private boolean colComplience;
-	private boolean boxComplience;
-	private boolean ifCorrect;
+	private int rowComplience;
+	private int colComplience;
+	private int boxComplience;
+	private int ifCorrect;
 	/**
 	 * Number constructor
 	 * @param value
@@ -18,16 +18,16 @@ public class Number {
 	 * @param init
 	 * boolean variable state whether this number is original number or user input number
 	 */
-	public Number(int value, boolean orig, int colID, int rowID, int boxID) {
+	public Number(int value, boolean orig, int rowID, int colID, int boxID) {
 		this.value = value;
 		this.orig = orig;
 		this.rowID = rowID;
 		this.colID = colID;
 		this.boxID = boxID;
-		this.rowComplience = true;
-		this.colComplience = true;
-		this.boxComplience = true;
-		this.ifCorrect = true;
+		this.rowComplience = 0;
+		this.colComplience = 0;
+		this.boxComplience = 0;
+		this.ifCorrect = 0;
 	}
 	
 
@@ -73,38 +73,38 @@ public class Number {
 	}
 
 
-	public boolean getRowComplience() {
+	public int getRowComplience() {
 		return this.rowComplience;
 	}
 
-	public void setRowComplience(boolean rowComplience) {
+	public void setRowComplience(int rowComplience) {
 		this.rowComplience = rowComplience;
 	}
 
 
-	public boolean getColComplience() {
+	public int getColComplience() {
 		return this.colComplience;
 	}
 
-	public void setColComplience(boolean colComplience) {
+	public void setColComplience(int colComplience) {
 		this.colComplience = colComplience;
 	}
 
 
-	public boolean getBoxComplience() {
+	public int getBoxComplience() {
 		return this.boxComplience;
 	}
 
-	public void setBoxComplience(boolean boxComplience) {
+	public void setBoxComplience(int boxComplience) {
 		this.boxComplience = boxComplience;
 	}
 
 
-	public boolean getIfCorrect() {
+	public int getIfCorrect() {
 		return this.ifCorrect;
 	}
 
-	public void setIfCorrect(boolean ifCorrect) {
+	public void setIfCorrect(int ifCorrect) {
 		this.ifCorrect = ifCorrect;
 	}
 

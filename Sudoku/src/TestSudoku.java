@@ -25,26 +25,43 @@ public class TestSudoku extends JFrame implements KeyListener {
         // only got here if we didn't return false
         return true;
     }
-
+    private void undoErrorMarkers() {
+        Number toUndoErrorMarker = numberTable.getPuzzle()[rowIDGlobal][colIDGlobal];
+        numberTable.undoIfMistake(toUndoErrorMarker);
+        numberTable.undoIfValid(toUndoErrorMarker);
+    }
     @Override
     public void keyTyped(KeyEvent e) {
         // Locate the selected cell (toggled toggle button)
         String text = String.valueOf(e.getKeyChar());
         int keyCode = e.getKeyChar();
-        for (int rowID = 0; rowID < 9; rowID++) {
-            for (int colID = 0; colID < 9; colID++) {
-                ExtendedJToggleButton button = buttonTable[rowID][colID];
-                if (button.isSelected() && ! this.numberTable.getPuzzle()[rowID][colID].getOrig()) {
-                    if (isInteger(text)){
-                        // Change button text
-                        button.setText(text);
-                        button.setForeground(Color.decode("#4a90e2"));
-                    } else if ((keyCode == 8) || (keyCode == 127)) {
-                        // Change button text
-                        button.setText("");
-                        button.setForeground(Color.WHITE);
+        ExtendedJToggleButton button = buttonTable[this.rowIDGlobal][this.colIDGlobal];
+        if (button.isSelected() && ! this.numberTable.getPuzzle()[this.rowIDGlobal][this.colIDGlobal].getOrig()) {
+            if (isInteger(text)) {
+                if (Integer.parseInt(text) != 0) {
+                    // Change button text
+                    button.setText(text);
+                    
+                    Number number = new Number(Integer.parseInt(text), false, this.rowIDGlobal, this.colIDGlobal,
+                            this.boxIDGlobal);
+                    if (numberTable.getPuzzle()[rowIDGlobal][colIDGlobal].getValue() != 0) {
+                        undoErrorMarkers();
                     }
+                    numberTable.setPuzzle(number);
+                    numberTable.ifMistake(number);
+                    numberTable.ifValid(number);
+                    // Change color
+                    selectChangeColor();
                 }
+            } else if ((keyCode == 8) || (keyCode == 127)) {
+                // Change button text
+                button.setText("");
+                button.setForeground(Color.BLACK);
+                Number number = new Number(0, false, this.rowIDGlobal, this.colIDGlobal, this.boxIDGlobal);
+                undoErrorMarkers();
+                numberTable.setPuzzle(number);
+                // Change color
+                selectChangeColor();
             }
         }
     }
@@ -60,8 +77,10 @@ public class TestSudoku extends JFrame implements KeyListener {
     }
 
     private void selectChangeColor() {
+        Number number = numberTable.getPuzzle()[rowIDGlobal][colIDGlobal];
         for (int rowID = 0; rowID < 9; rowID++) {
             for (int colID = 0; colID < 9; colID++) {
+                Number referenceNumber = numberTable.getPuzzle()[rowID][colID];
                 int rowCompensation = 0;
                 switch (rowID / 3) {
                     case 0:
@@ -77,11 +96,27 @@ public class TestSudoku extends JFrame implements KeyListener {
                 // Get box id
                 int boxID= (rowID / 3) + (colID / 3) + rowCompensation;
                 ExtendedJToggleButton button = buttonTable[rowID][colID];
+                button.setBackground(Color.WHITE);
+                if (!referenceNumber.getOrig()) {
+                    button.setForeground(Color.decode("#4a90e2"));
+                }
                 // Set row, column and box color
                 if ((rowID == this.rowIDGlobal) || (colID == this.colIDGlobal) || (boxID == this.boxIDGlobal)){
                     button.setBackground(Color.decode("#e2e7ed"));
-                } else {
-                    button.setBackground(Color.WHITE);
+                }
+                // Set color for cells with the same values as that of selected cell
+                if (isInteger(button.getText())) {
+                    if ((number.getValue() == Integer.parseInt(button.getText()))) {
+                        button.setBackground(Color.decode("#cbdbed"));
+                    }
+                }
+                // Set color for cells with error
+                if ((referenceNumber.getRowComplience() != 0) || (referenceNumber.getColComplience() != 0) || (referenceNumber.getBoxComplience() != 0)  || (referenceNumber.getIfCorrect() != 0)) {
+                    button.setBackground(Color.decode("#f7cfd6"));
+                    if (!referenceNumber.getOrig()) {
+                        button.setForeground(Color.decode("#fb3d40"));
+                    }
+
                 }
 
             }
@@ -177,22 +212,33 @@ public class TestSudoku extends JFrame implements KeyListener {
         UIManager.put("ToggleButton.select", Color.decode("#bbdefb"));
         // Creat the MenuBar and adding components
         JMenuBar menu = new JMenuBar();
-        JMenu difficulty = new JMenu("Difficulty");
-        JMenu check = new JMenu("Check for Mistakes");
-        menu.add(difficulty);
-        menu.add(check);
+        // Create new game menu
+        JMenu newGame = new JMenu("New Game");
+        menu.add(newGame);
+        JCheckBoxMenuItem easy = new JCheckBoxMenuItem("Easy");
+        easy.setSelected(true);
+        JCheckBoxMenuItem intermediate = new JCheckBoxMenuItem("Intermediate");
+        JCheckBoxMenuItem hard = new JCheckBoxMenuItem("Hard");
+        newGame.add(easy);
+        newGame.add(intermediate);
+        newGame.add(hard);
 
-        JCheckBoxMenuItem difficultyEasy = new JCheckBoxMenuItem("Easy");
-        JCheckBoxMenuItem difficultyIntermediate = new JCheckBoxMenuItem("Intermediate");
-        JCheckBoxMenuItem difficultyHard = new JCheckBoxMenuItem("Hard");
-        difficulty.add(difficultyEasy);
-        difficulty.add(difficultyIntermediate);
-        difficulty.add(difficultyHard);
-        // Create checkBoxGroup for difficulty menu
+        // Create checkBoxGroup for new game menu
         ButtonGroup checkBoxGroup = new ButtonGroup();
-        checkBoxGroup.add(difficultyEasy);
-        checkBoxGroup.add(difficultyIntermediate);
-        checkBoxGroup.add(difficultyHard);
+        checkBoxGroup.add(easy);
+        checkBoxGroup.add(intermediate);
+        checkBoxGroup.add(hard);
+
+        // Create check options
+        JMenu checks = new JMenu("Check Options");
+        menu.add(checks);
+        JCheckBoxMenuItem checkForComplience = new JCheckBoxMenuItem("Check for Complience");
+        checkForComplience.setSelected(true);
+        JCheckBoxMenuItem checkForMistake = new JCheckBoxMenuItem("Check for Mistake");
+        checkForMistake.setSelected(true);
+        checks.add(checkForComplience);
+        checks.add(checkForMistake);
+
 
         // Create buttonGroup for Sudoku grid
         buttonPanel.setLayout(new GridLayout (9,9));
@@ -200,11 +246,9 @@ public class TestSudoku extends JFrame implements KeyListener {
 
         // Creating the panel at bottom and adding components
         JPanel panel = new JPanel(); 
-        JButton newGame = new JButton("New Game");
         JButton restart = new JButton("Restart");
         JButton hint = new JButton("Hint");
         JButton erase = new JButton("Erase");
-        panel.add(newGame); // Components Added using Flow Layout
         panel.add(restart);
         panel.add(hint);
         panel.add(erase);
