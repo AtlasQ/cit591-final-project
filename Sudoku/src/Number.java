@@ -3,8 +3,8 @@ public class Number {
 
 	private int value;
 	private boolean orig;
-	private int colID;
 	private int rowID;
+	private int colID;
 	private int boxID;
 	private boolean rowComplience;
 	private boolean colComplience;
@@ -20,8 +20,8 @@ public class Number {
 	public Number(int value, boolean orig, int colID, int rowID, int boxID) {
 		this.value = value;
 		this.orig = orig;
-		this.colID = colID;
 		this.rowID = rowID;
+		this.colID = colID;
 		this.boxID = boxID;
 		this.rowComplience = true;
 		this.colComplience = true;
@@ -42,19 +42,18 @@ public class Number {
 		return this.orig;
 	}
 	
+	/*
+	 * Getter to get orig
+	 */
+	public int getRowID() {
+		return this.rowID;
+	}
 
 	/*
 	 * Getter to get number value
 	 */
 	public int getColID() {
 		return this.colID;
-	}
-
-	/*
-	 * Getter to get orig
-	 */
-	public int getRowID() {
-		return this.rowID;
 	}
 
 	/*

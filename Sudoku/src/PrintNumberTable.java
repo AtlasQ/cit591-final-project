@@ -139,7 +139,7 @@ public class PrintNumberTable {
 		System.out.println("    ⒈  ⒉  ⒊   ⒋  ⒌  ⒍   ⒎  ⒏  ⒐  ");
 
 		// print border
-		System.out.println("  |⏤⏤⏤⏤⏤⏤|⏤⏤⏤⏤⏤⏤|⏤⏤⏤⏤⏤⏤|");
+		System.out.println("  |---------|---------|---------|");
 
 		for (int i = 0; i <= 2; i++) {
 			// print row name
@@ -172,7 +172,7 @@ public class PrintNumberTable {
 			System.out.println();
 
 		}
-		System.out.println("  |⏤⏤⏤⏤⏤⏤|⏤⏤⏤⏤⏤⏤|⏤⏤⏤⏤⏤⏤|");
+		System.out.println("  |---------|---------|---------|");
 
 		for (int i = 3; i <= 5; i++) {
 			System.out.print(rowName[i] + " | ");
@@ -203,7 +203,7 @@ public class PrintNumberTable {
 			System.out.println();
 
 		}
-		System.out.println("  |⏤⏤⏤⏤⏤⏤|⏤⏤⏤⏤⏤⏤|⏤⏤⏤⏤⏤⏤|");
+		System.out.println("  |---------|---------|---------|");
 
 		for (int i = 6; i <= 8; i++) {
 			System.out.print(rowName[i] + " | ");
@@ -234,7 +234,7 @@ public class PrintNumberTable {
 			System.out.println();
 
 		}
-		System.out.println("  |⏤⏤⏤⏤⏤⏤|⏤⏤⏤⏤⏤⏤|⏤⏤⏤⏤⏤⏤|");
+		System.out.println("  |---------|---------|---------|");
 
 		// simple version
 		// System.out.println("|---|---|---|---|---|---|---|---|---|");

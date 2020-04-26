@@ -91,7 +91,6 @@ public class NumberTable {
 
 	public static void main(String[] args) {
 //		NewGameCreator nGC = new NewGameCreator();
-//		nGC.setGameSeed();
 //		nGC.setPuzzleS();
 //		nGC.setAnswerS();
 //		String puzzleS = nGC.getPuzzleS();
