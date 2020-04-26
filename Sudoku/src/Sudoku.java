@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.event.*;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.awt.*;
 
@@ -55,12 +56,40 @@ public class Sudoku extends JFrame implements KeyListener {
         newGame.add(easy);
         newGame.add(intermediate);
         newGame.add(hard);
+        
+     
+       
+            ActionListener aListener = new ActionListener() {
+            public void actionPerformed(ActionEvent He) {
+                // TODO Auto-generated method stub
+                JCheckBoxMenuItem option =   (JCheckBoxMenuItem) He.getSource();
+               
+                if (option.isSelected()) {
+                   
+                    currentDifficulty = option.getText();
+                    System.out.println(option.getText());
+
+                    hintChanceLeft = hintChance.get(currentDifficulty);
+                    System.out.println(hintChanceLeft);
+                    
+
+                }
+
+            }}
+        ;
+        hard.addActionListener(aListener);
+        easy.addActionListener(aListener);
+        intermediate.addActionListener(aListener);
 
         // Create checkBoxGroup for new game menu
         ButtonGroup checkBoxGroup = new ButtonGroup();
         checkBoxGroup.add(easy);
         checkBoxGroup.add(intermediate);
         checkBoxGroup.add(hard);
+        
+
+        
+    
 
         // Create check options
         JMenu checks = new JMenu("Check Options");
