@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
 
-public class TestSudoku extends JFrame implements KeyListener {
+public class Sudoku extends JFrame implements KeyListener {
 
     
     private static final long serialVersionUID = 3517500680629946998L;
@@ -190,7 +190,7 @@ public class TestSudoku extends JFrame implements KeyListener {
         }
     }
 
-    public TestSudoku(NumberTable numberTable) {
+    public Sudoku(NumberTable numberTable) {
         super("Sudoku - Team 99");
 
         this.numberTable = numberTable;
@@ -271,7 +271,7 @@ public class TestSudoku extends JFrame implements KeyListener {
         String answerS = ngc.getAnswerS();
         
         NumberTable numberTable = new NumberTable(puzzleS, answerS);
-        TestSudoku a = new TestSudoku(numberTable);
+        Sudoku a = new Sudoku(numberTable);
     }
 
 
