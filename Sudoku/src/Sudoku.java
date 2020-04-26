@@ -8,6 +8,11 @@ public class Sudoku {
     private Number[][] puzzle;
     private Number[][] answer;
     private NumberTable nt;
+    private String difficulty = "Hard";
+
+    public void setDifficulty(String difficulty) {
+        this.difficulty = difficulty;
+    }
 
     public void newGame() {
         // Set game seed
@@ -31,6 +36,11 @@ public class Sudoku {
     }
     public NumberTable getNt() {
         return nt;
+    }
+
+    public static void main(String[] args) {
+        Sudoku sudoku = new Sudoku();
+        sudoku.newGame();
     }
 
 }
