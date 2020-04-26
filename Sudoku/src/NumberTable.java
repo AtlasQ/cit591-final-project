@@ -2,9 +2,10 @@
  * NumberTable
  */
 public class NumberTable {
-
+	
 	private Number[][] puzzle = new Number[9][9];
 	private Number[][] answer = new Number[9][9];
+	private Number[][] originalCopyPuzzle = new Number[9][9];
 	/**
 	 * Constructor to save puzzle string and answer string read from .csv files
 	 * to 2-dimensional array
@@ -13,22 +14,9 @@ public class NumberTable {
 	 * @param answerStr
 	 */
 	public NumberTable(String puzzleStr, String answerStr) {
-		for (int row = 0; row <= 8; row++) {
-			for (int col = 0; col <= 8; col++) {
-				int rowCompensation = 0;
-				switch (row / 3) {
-					case 0:
-						rowCompensation = 0;
-						break;
-					case 1:
-						rowCompensation = 2;
-						break;
-					case 2:
-						rowCompensation = 4;
-						break;
-				}
-				// box id
-				int box = (row / 3) + (col / 3) + rowCompensation;
+		for (int row = 0; row < 9; row++) {
+			for (int col = 0; col < 9; col++) {
+				int box = HelperFunction.calculateBoxID(row, col);
 				// current substring for puzzleStr
 				String subP = puzzleStr.substring(row * 9 + col, row * 9 + col + 1);
 
@@ -40,10 +28,10 @@ public class NumberTable {
 
 				// Number class for current puzzle number
 				Number puzzleN = new Number(Integer.parseInt(subP), orig, row, col, box);
-
+				Number puzzleN_copy = new Number(Integer.parseInt(subP), orig, row, col, box);
 				// Save current puzzle Number to our 2-dimensional array puzzle
 				this.puzzle[row][col] = puzzleN;
-
+				this.originalCopyPuzzle[row][col] = puzzleN_copy;
 				// current substring for answerStr
 				String subA = answerStr.substring(row * 9 + col, row * 9 + col + 1);
 
@@ -52,6 +40,16 @@ public class NumberTable {
 
 				// Save current puzzle Number to our 2-dimensional array puzzle
 				this.answer[row][col] = answerN;
+			}
+		}
+	}
+
+	public void copyOriginalPuzzle() {
+		for (int row = 0; row < 9; row++) {
+			for (int col = 0; col < 9; col++) {
+				Number referenceNumber = originalCopyPuzzle[row][col];
+				Number number = new Number(referenceNumber.getValue(), referenceNumber.getOrig(), referenceNumber.getRowID(), referenceNumber.getColID(), referenceNumber.getBoxID());
+				this.puzzle[row][col] = number;
 			}
 		}
 	}
