@@ -31,3 +31,5 @@ hs_err_pid*
 .txt
 .DS_Store
 /src/
+
+.ipynb_checkpoints

@@ -71,16 +71,5 @@ public class NewGameCreator {
 	
 	public String getAnswerS() {
 		return answerS;
-	}
-    
-	public static void main(String[] args) {
-//		NewGameCreator nGC = new NewGameCreator();
-//		nGC.setRandomGameSeed();
-//		nGC.setPuzzleS();
-//		nGC.setAnswerS();
-//		System.out.println(nGC.getPuzzleS());
-//		System.out.println(nGC.getPuzzleS().substring(80, 81));
-//		System.out.println(nGC.getAnswerS());
-	}
-	
+	}	
 }
