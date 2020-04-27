@@ -16,6 +16,13 @@ public class JUnitTest {
     static boolean complienceCheckOn;
     static boolean mistakeCheckSetOff;
     static boolean complienceCheckSetOff;
+    static int puzzleCount;
+    static int answerCount;
+    static int copyOriginalPuzzleCount;
+    static int copyPuzzleEqualOriginalCount;
+    
+    
+
     
    
 
@@ -37,6 +44,8 @@ public class JUnitTest {
         }
 
     }
+    
+  
     public static void gameModeAndCheckBox() {
         NewGameCreator Test = new NewGameCreator();
         Test.setPuzzleS();
@@ -45,6 +54,9 @@ public class JUnitTest {
         String answerS = Test.getAnswerS();
         NumberTable numberTable = new NumberTable(puzzleS, answerS);
         Sudoku Jin = new Sudoku(numberTable);
+        Jin.setVisible(false);
+        
+        //Validate Sure Difficulty mode is working.
         Jin.setCurrentDifficulty("Easy");
      
         easyHint = Jin.getHintChance().get(Jin.getCurrentDifficulty());
@@ -55,6 +67,8 @@ public class JUnitTest {
         Jin.setCurrentDifficulty("Hard");
         
         hardHint = Jin.getHintChance().get(Jin.getCurrentDifficulty());
+        
+        //Validate CheckMistake and CheckComplience are default on and can be turn off.
         
         mistakeCheckOn = Jin.isCheckMistake();
         
@@ -72,7 +86,36 @@ public class JUnitTest {
        
         
         complienceCheckSetOff = Jin.getCheckForComplience().isSelected();
+        
+        //Validate there is no null is puzzle template, all numbers were read in.
+        puzzleCount = 0;
+        answerCount = 0;
+        copyOriginalPuzzleCount =0;
+        copyPuzzleEqualOriginalCount =0;
+      
+        
+        for (int row = 0; row < 9; row++) {
+            for (int col = 0; col < 9; col++) {
+                if(numberTable.getPuzzle()[row][col] != null) {
+                    puzzleCount++;
+                }
+                if(numberTable.getAnswer()[row][col] != null) {
+                    answerCount++;
+                }
+                if(numberTable.getOriginalCopyPuzzle()[row][col] != null) {
+                    copyOriginalPuzzleCount++;
+                }
+                if(numberTable.getPuzzle()[row][col].getValue() == (numberTable.getOriginalCopyPuzzle()[row][col]).getValue()) {
+                    copyPuzzleEqualOriginalCount++;
+                }
+                
+            
+    
+        
     }
+        }
+    }
+    
         
 
 
@@ -83,47 +126,74 @@ public class JUnitTest {
         
         assertEquals(83, length, "Check that the length should be 83 for next input!");
     }
-    @Test 
-    public void makeSureEasyGiveTenHints() {
-        JUnitTest.gameModeAndCheckBox();
-        
-        assertEquals(10, easyHint, "Check that the easy mode should provide user ten hints");
-    }
+   
     @Test 
     public void makeSureIntermediateGiveFiveHints() {
-    
         JUnitTest.gameModeAndCheckBox();
+    
+        
         assertEquals(5, intermediateHint, "Check that the intermediate mode should provide user five hints");
     }
     @Test 
+    public void makeSureEasyGiveTenHints() {
+       
+        assertEquals(10, easyHint, "Check that the easy mode should provide user ten hints");
+    }
+    
+    @Test 
     public void makeSureHardGiveTwoHints() {
     
-        JUnitTest.gameModeAndCheckBox();
+
         assertEquals(2, hardHint, "Check that the hard mode should only provide user 2 hints");
     }
     @Test 
     public void makeSureCheckMistakeEnable() {
     
-        JUnitTest.gameModeAndCheckBox();
+    
         assertEquals(true, mistakeCheckOn, "Check that the check Mistake mode is default enabled");
     }
     @Test 
     public void makeSureCheckComplienceEnable() {
     
-        JUnitTest.gameModeAndCheckBox();
+       
         assertEquals(true, complienceCheckOn, "Check that the check Complience mode is default enabled");
     }
     @Test 
     public void makeSureCheckMistakeCanBeDisabled() {
     
-        JUnitTest.gameModeAndCheckBox();
+
         assertEquals(false, mistakeCheckSetOff, "Check that the check Mistake mode can be set disabled");
     }
     @Test 
     public void makeSureCheckComplienceCanBeDisabled() {
     
-        JUnitTest.gameModeAndCheckBox();
+   
         assertEquals(false, complienceCheckSetOff, "Check that the check Complience Mode can be set disabled");
+    }
+    
+    @Test 
+    public void makeSurePuzzleHasNoNull() {
+    
+       
+        assertEquals(81, puzzleCount, "Check that there is no null in puzzle template");
+    }
+    
+    @Test 
+    public void makeSureAnswerHasNoNull() {
+    
+        
+        assertEquals(81, answerCount, "Check that there is no null in answer template");
+    }
+    @Test 
+    public void makeSureCopyOfOrignalPuzzleHasNoNull() {
+    
+        
+        assertEquals(81, copyOriginalPuzzleCount, "Check that there is no null in answer template");
+    }
+    @Test 
+    public void makeSureCopyPuzzleEqualOriginal() {
+
+        assertEquals(81, copyPuzzleEqualOriginalCount, "Check that copy puzzle equal original puzzle");
     }
     
 
