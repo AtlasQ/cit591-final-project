@@ -3,7 +3,9 @@
  */
 public class NumberTable {
 	
-	private Number[][] puzzle = new Number[9][9];
+	
+
+    private Number[][] puzzle = new Number[9][9];
 	private Number[][] answer = new Number[9][9];
 	private Number[][] originalCopyPuzzle = new Number[9][9];
 	/**
@@ -55,9 +57,18 @@ public class NumberTable {
 	}
 
 	// getter for puzzle matrix
+	
 	public Number[][] getPuzzle() {
 		return puzzle;
 	}
+	
+	/**
+	 * Getter for OriginalCopyPuzzle
+	 * @return
+	 */
+	public Number[][] getOriginalCopyPuzzle() {
+	        return originalCopyPuzzle;
+	    }
 
 	// setter to put user's input into puzzle matrix
 	public void setPuzzle(Number number) {
