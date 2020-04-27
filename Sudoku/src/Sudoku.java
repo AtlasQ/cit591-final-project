@@ -7,6 +7,41 @@ import java.awt.*;
 public class Sudoku extends JFrame implements KeyListener {
 
     
+    public JCheckBoxMenuItem getCheckForMistake() {
+        return checkForMistake;
+    }
+
+    public JCheckBoxMenuItem getCheckForComplience() {
+        return checkForComplience;
+    }
+
+    public boolean isCheckComplience() {
+        return checkComplience;
+    }
+
+    public boolean isCheckMistake() {
+        return checkMistake;
+    }
+
+    public String getCurrentDifficulty() {
+        return currentDifficulty;
+    }
+
+    public HashMap<String, Integer> getHintChance() {
+        return hintChance;
+    }
+
+    public int getHintChanceLeft() {
+        return hintChanceLeft;
+    }
+
+    public void setCurrentDifficulty(String currentDifficulty) {
+        this.currentDifficulty = currentDifficulty;
+    }
+
+
+
+
     private static final long serialVersionUID = 3517500680629946998L;
     private ExtendedJToggleButton[][] buttonTable = new ExtendedJToggleButton[9][9];
     private ButtonGroup buttonGroup = new ButtonGroup();
@@ -20,6 +55,8 @@ public class Sudoku extends JFrame implements KeyListener {
     private int hintChanceLeft;
     private boolean checkComplience;
     private boolean checkMistake;
+    private JCheckBoxMenuItem checkForMistake;
+    private JCheckBoxMenuItem checkForComplience;
 
     public Sudoku(NumberTable numberTable) {
         super("Sudoku - Team 99");
@@ -94,7 +131,7 @@ public class Sudoku extends JFrame implements KeyListener {
         // Create check options
         JMenu checks = new JMenu("Check Options");
         menu.add(checks);
-        JCheckBoxMenuItem checkForComplience = new JCheckBoxMenuItem("Check for Complience");
+        checkForComplience = new JCheckBoxMenuItem("Check for Complience");
         checkForComplience.setSelected(true);
         checkComplience = checkForComplience.isSelected();
         checkForComplience.addActionListener(new ActionListener() {
@@ -103,7 +140,7 @@ public class Sudoku extends JFrame implements KeyListener {
                 cellFormatting();
             }
         });
-        JCheckBoxMenuItem checkForMistake = new JCheckBoxMenuItem("Check for Mistake");
+        checkForMistake = new JCheckBoxMenuItem("Check for Mistake");
         checkForMistake.setSelected(true);
         checkMistake = checkForMistake.isSelected();
         checkForMistake.addActionListener(new ActionListener() {
