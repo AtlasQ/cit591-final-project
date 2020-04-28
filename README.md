@@ -1,34 +1,50 @@
-# (Client Name) - (Project Type)
-
+# The Sudoku Game - Team 99
 ___
 
-#### High level description of the project
-We plan to build a desktop Sudoku application that can random generate sudoku board based on the difficulty selected by the player and suggest next moves as per player’s request. This project idea is subject to change.
-
-The work breakdown below is subject to change.
-Jinhuang: GUI development;
-Qianfan: Sudoku board generation;
-Qixiu: Suggestion mechanism.
-
-
-#### Project Value
-(What kind of value the project brings)
-
+### Names of the members of your team
+Jinhuang Lin, linjin@seas.upenn.edu
+Qianfan Yu, qianfan@seas.upenn.edu
+Qixiu Quan, atlasq@seas.upenn.edu
 ___
-#### Business problem
-(Define the business problem the project is seeking to solve)
 
-#### Scope
-(Include detailed information or reference for the scope of the project)
+### High level description of the project
+We plan to build a desktop Sudoku application that can random generate sudoku board based on the difficulty selected by the player and suggest next moves as per player’s request. 
 
-#### Success Criteria
-(Define exact success criteria for the project)
+### A short work breakdown
+Jinhuang: GUI development, JUnit test;
+Qianfan: Development of Sudoku number table, suggestor, input validator , number class;
+Qixiu: GUI development and Game Logic.
 
-#### Approach
-(A brief description of the approach/methodology to be used)
+### Recommended environment
+#### OS
+```
+Windows 10
+```
+#### Java version
+```
+java version "1.8.0_241"
+Java(TM) SE Runtime Environment (build 1.8.0_241-b07)
+Java HotSpot(TM) 64-Bit Server VM (build 25.241-b07, mixed mode)
+```
+### Package dependencies
+```
+javax.swing
+org.junit
+```
+### Working directory
+```
+.../Sudoku
+```
 
-#### Deliverable
-(Describe the client's expected deliverable for the project)
+### How to run the game
+In order to run the game, first, we suggest user to setup your local environment as recommened above. And then simply compile and run the .java file: 
+```
+Sudoku.java
+```
+If successful, the following Game window will pop up, which means you can enjoy the game.
+
+![](images/screenshot1.PNG)
+
 
 ___
 
