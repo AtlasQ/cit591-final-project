@@ -1,0 +1,13 @@
+Names of the members of your team:
+Jinhuang Lin, linjin@seas.upenn.edu
+Qianfan Yu, qianfan@seas.upenn.edu
+Qixiu Quan, atlasq@seas.upenn.edu
+
+Project idea along with a short description:
+We plan to build a desktop Sudoku application that can randomly generate sudoku board based on the difficulty selected by the player and suggest next moves as per player’s request.
+
+
+A short work breakdown:
+Jinhuang: GUI development, JUnit test;
+Qianfan: Development of Sudoku number table, suggestor, input validator , number class;
+Qixiu: GUI development and Game Logic.
