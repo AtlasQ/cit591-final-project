@@ -49,7 +49,7 @@ public class JUnitTest {
         String puzzleS = Test.getPuzzleS();
         String answerS = Test.getAnswerS();
         NumberTable numberTable = new NumberTable(puzzleS, answerS);
-        Sudoku Jin = new Sudoku(numberTable);
+        Sudoku Jin = new Sudoku();
         Jin.setVisible(false);
 
         // Test setRandomGameSeed method
