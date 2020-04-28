@@ -360,11 +360,12 @@ public class Sudoku extends JFrame implements KeyListener {
     private void newGameFunction() {
         if (this.hint != null) {
             this.hint.setEnabled(true);
+            this.hintChanceLeft = hintChance.get(currentDifficulty);
             this.hint.setText("Hint (" + hintChanceLeft + " left)");
         }
         NewGameCreator ngc = new NewGameCreator();
-        ngc.setDifficulty(this.currentDifficulty);
         this.hintChanceLeft = hintChance.get(currentDifficulty);
+        ngc.setDifficulty(this.currentDifficulty);
         ngc.setRandomGameSeed();
         ngc.setPuzzleS();
         ngc.setAnswerS();
