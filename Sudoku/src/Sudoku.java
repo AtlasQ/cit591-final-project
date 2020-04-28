@@ -58,10 +58,9 @@ public class Sudoku extends JFrame implements KeyListener {
     private JCheckBoxMenuItem checkForMistake;
     private JCheckBoxMenuItem checkForComplience;
 
-    public Sudoku(NumberTable numberTable) {
+    public Sudoku() {
         super("Sudoku - Team 99");
-        this.numberTable = numberTable;
-        this.hintChance.put("Easy", 10);
+        this.hintChance.put("Easy", 100);
         this.hintChance.put("Intermediate", 5);
         this.hintChance.put("Hard", 2);
         this.hintChanceLeft = hintChance.get(currentDifficulty);
@@ -88,31 +87,30 @@ public class Sudoku extends JFrame implements KeyListener {
         menu.add(newGame);
         JCheckBoxMenuItem easy = new JCheckBoxMenuItem("Easy");
         easy.setSelected(true);
+        this.currentDifficulty = "Easy";
+        newGameFunction();
         JCheckBoxMenuItem intermediate = new JCheckBoxMenuItem("Intermediate");
         JCheckBoxMenuItem hard = new JCheckBoxMenuItem("Hard");
         newGame.add(easy);
         newGame.add(intermediate);
         newGame.add(hard);
         
-     
-       
-            ActionListener aListener = new ActionListener() {
-            public void actionPerformed(ActionEvent He) {
-                // TODO Auto-generated method stub
-                JCheckBoxMenuItem option =   (JCheckBoxMenuItem) He.getSource();
-               
-                if (option.isSelected()) {
-                   
-                    currentDifficulty = option.getText();
-                    System.out.println(option.getText());
+        ActionListener aListener = new ActionListener() {
+        public void actionPerformed(ActionEvent He) {
+            JCheckBoxMenuItem option =   (JCheckBoxMenuItem) He.getSource();
+            
+            if (option.isSelected()) {
+                
+                currentDifficulty = option.getText();
 
-                    hintChanceLeft = hintChance.get(currentDifficulty);
-                    System.out.println(hintChanceLeft);
-                    
+                hintChanceLeft = hintChance.get(currentDifficulty);
 
-                }
+                newGameFunction();
+                cleanAllFunction();
 
-            }}
+            }
+
+        }}
         ;
         hard.addActionListener(aListener);
         easy.addActionListener(aListener);
@@ -254,9 +252,11 @@ public class Sudoku extends JFrame implements KeyListener {
 
     private void cellFormatting() {
         Number number = this.numberTable.getPuzzle()[this.rowIDGlobal][this.colIDGlobal];
+        int correctCells = 0;
         for (int rowID = 0; rowID < 9; rowID++) {
             for (int colID = 0; colID < 9; colID++) {
                 Number referenceNumber = this.numberTable.getPuzzle()[rowID][colID];
+                Number answeNumber = this.numberTable.getAnswer()[rowID][colID];
                 int boxID = HelperFunction.calculateBoxID(rowID, colID);
                 ExtendedJToggleButton button = this.buttonTable[rowID][colID];
                 button.setBackground(Color.WHITE);
@@ -294,9 +294,17 @@ public class Sudoku extends JFrame implements KeyListener {
                         }
                     }
                 }
+                if (referenceNumber.equals(answeNumber)) {
+                    correctCells ++;
+                }
 
 
             }
+        }
+
+        if (correctCells == 81) {
+            congratulationFormatting();
+            cleanAllFunction();
         }
     }
     
@@ -353,7 +361,16 @@ public class Sudoku extends JFrame implements KeyListener {
         }
     }
 
+    private void newGameFunction() {
+        NewGameCreator ngc = new NewGameCreator();
+        ngc.setDifficulty(this.currentDifficulty);
+        ngc.setRandomGameSeed();
+        ngc.setPuzzleS();
+        ngc.setAnswerS();
+        numberTable = new NumberTable(ngc.getPuzzleS(), ngc.getAnswerS());
 
+
+    }
     private void drawButtons(ButtonGroup buttonGroup, JPanel buttonPanel) {
         // Get puzzel from numberTable
         Number[][] puzzel = this.numberTable.getPuzzle();
@@ -406,19 +423,17 @@ public class Sudoku extends JFrame implements KeyListener {
         }
     }
 
+    private void congratulationFormatting() {
+        JOptionPane.showMessageDialog(null, "Congratulations! You have solved the Sudoku puzzle.");
+        newGameFunction();
+    }
+
 
 
 
     public static void main(String args[]) {
         // Launch
-        NewGameCreator ngc = new NewGameCreator();
-        ngc.setPuzzleS();
-        ngc.setAnswerS();
-        String puzzleS = ngc.getPuzzleS();
-        String answerS = ngc.getAnswerS();
-        
-        NumberTable numberTable = new NumberTable(puzzleS, answerS);
-        Sudoku a = new Sudoku(numberTable);
+        Sudoku a = new Sudoku();
     }
 
 
