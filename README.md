@@ -38,7 +38,7 @@ ___
 ### How to run the game
 In order to run the game, first, we suggest user to setup your local environment as recommened above. And then simply compile and run the .java file: 
 ```
-Sudoku.java
+Sudoku/src/Sudoku.java
 ```
 If successful, the following Game window will pop up. Enjoy the game!
 
