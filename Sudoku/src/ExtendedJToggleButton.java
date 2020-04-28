@@ -1,16 +1,15 @@
 import javax.swing.JToggleButton;
 
-public class ExtendedJToggleButton extends JToggleButton  {
+public class ExtendedJToggleButton extends JToggleButton {
 
     /**
      *
      */
     private static final long serialVersionUID = 1L;
-    
+
     private int rowID;
     private int colID;
     private int boxID;
-
 
     public int getRowID() {
         return this.rowID;

@@ -2,15 +2,14 @@
  * NumberTable
  */
 public class NumberTable {
-	
-	
 
-    private Number[][] puzzle = new Number[9][9];
+	private Number[][] puzzle = new Number[9][9];
 	private Number[][] answer = new Number[9][9];
 	private Number[][] originalCopyPuzzle = new Number[9][9];
+
 	/**
-	 * Constructor to save puzzle string and answer string read from .csv files
-	 * to 2-dimensional array
+	 * Constructor to save puzzle string and answer string read from .csv files to
+	 * 2-dimensional array
 	 * 
 	 * @param puzzleStr
 	 * @param answerStr
@@ -50,31 +49,33 @@ public class NumberTable {
 		for (int row = 0; row < 9; row++) {
 			for (int col = 0; col < 9; col++) {
 				Number referenceNumber = originalCopyPuzzle[row][col];
-				Number number = new Number(referenceNumber.getValue(), referenceNumber.getOrig(), referenceNumber.getRowID(), referenceNumber.getColID(), referenceNumber.getBoxID());
+				Number number = new Number(referenceNumber.getValue(), referenceNumber.getOrig(),
+						referenceNumber.getRowID(), referenceNumber.getColID(), referenceNumber.getBoxID());
 				this.puzzle[row][col] = number;
 			}
 		}
 	}
 
 	// getter for puzzle matrix
-	
+
 	public Number[][] getPuzzle() {
 		return puzzle;
 	}
-	
+
 	/**
 	 * Getter for OriginalCopyPuzzle
+	 * 
 	 * @return
 	 */
 	public Number[][] getOriginalCopyPuzzle() {
-	        return originalCopyPuzzle;
-	    }
+		return originalCopyPuzzle;
+	}
 
 	// setter to put user's input into puzzle matrix
 	public void setPuzzle(Number number) {
 		puzzle[number.getRowID()][number.getColID()] = number;
 	}
-	
+
 	// getter for answer matrix
 	public Number[][] getAnswer() {
 		return answer;
@@ -146,7 +147,7 @@ public class NumberTable {
 				setPuzzle(number);
 			}
 		}
-		
+
 	}
 
 	public void undoIfValid(Number number) {

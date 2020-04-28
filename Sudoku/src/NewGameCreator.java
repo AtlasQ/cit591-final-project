@@ -3,9 +3,8 @@ import java.io.FileNotFoundException;
 import java.util.Random;
 import java.util.Scanner;
 
-
 public class NewGameCreator {
-	
+
 	// gameSeed is the random number randomly choose a game from the csv file
 	private int gameSeed;
 	// read number gameSeed line from puzzle.csv
@@ -14,10 +13,11 @@ public class NewGameCreator {
 	private String answerS;
 	// difficulty
 	private String difficulty;
-	
+
 	public void setDifficulty(String difficulty) {
 		this.difficulty = difficulty;
 	}
+
 	public void setGameSeed(int gameSeed) {
 		this.gameSeed = gameSeed;
 	}
@@ -39,9 +39,9 @@ public class NewGameCreator {
 				gameSeed = r.nextInt(1497);
 				break;
 		}
-		
+
 	}
-	
+
 	// this will set puzzleS to the number of gameSeed line of puzzle.csv
 	public void setPuzzleS() {
 		File f;
@@ -73,7 +73,7 @@ public class NewGameCreator {
 			System.out.println("Can't find puzzle.csv");
 		}
 	}
-	
+
 	// this will set puzzleS to the number of gameSeed line of answer.csv
 	public void setAnswerS() {
 		File f;
@@ -104,18 +104,16 @@ public class NewGameCreator {
 			System.out.println("Can't find answer.csv");
 		}
 	}
-	
-	
-	
+
 	public int getGameSeed() {
 		return gameSeed;
 	}
-	
+
 	public String getPuzzleS() {
 		return puzzleS;
 	}
-	
+
 	public String getAnswerS() {
 		return answerS;
-	}	
+	}
 }
