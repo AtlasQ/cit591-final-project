@@ -4,7 +4,9 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class NewGameCreator {
-
+	/**
+	 * NewGameCreator class that reads difficulty from the game and return randomly the  Sudoku puzzle and its answer. Or user can get desired puzzle and answer based on designated the gameSeed
+	 */
 	// gameSeed is the random number randomly choose a game from the csv file
 	private int gameSeed;
 	// read number gameSeed line from puzzle.csv
@@ -25,6 +27,7 @@ public class NewGameCreator {
 	// class to random a seed
 	public void setRandomGameSeed() {
 		Random r = new Random();
+		// difficulty reader
 		switch (difficulty) {
 			case "Easy":
 				gameSeed = r.nextInt(10000);
@@ -45,6 +48,7 @@ public class NewGameCreator {
 	// this will set puzzleS to the number of gameSeed line of puzzle.csv
 	public void setPuzzleS() {
 		File f;
+		// difficulty reader
 		switch (difficulty) {
 			case "Easy":
 				f = new File("data/easy_puzzel.csv");
@@ -77,6 +81,7 @@ public class NewGameCreator {
 	// this will set puzzleS to the number of gameSeed line of answer.csv
 	public void setAnswerS() {
 		File f;
+		// difficulty reader
 		switch (difficulty) {
 			case "Easy":
 				f = new File("data/easy_solution.csv");

@@ -27,8 +27,8 @@ public class JUnitTest {
 
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
-
-        File inputFile = new File("/Users/linjinhuang/Documents/GitHub/cit591-final-project/Sudoku/puzzle.csv");
+        // Please put the right puzzle.csv location for first test.
+        File inputFile = new File("/Users/linjinhuang/Documents/GitHub/cit591-final-project/Sudoku/data/backup/puzzle.csv");
 
         // Reads the puzzle file
         try (Scanner in = new Scanner(inputFile)) {
@@ -44,6 +44,7 @@ public class JUnitTest {
 
     public static void gameModeAndCheckBox() {
         NewGameCreator Test = new NewGameCreator();
+        Test.setDifficulty("Easy");
         Test.setPuzzleS();
         Test.setAnswerS();
         String puzzleS = Test.getPuzzleS();
@@ -60,7 +61,7 @@ public class JUnitTest {
 
         int gameSeedNumber = Test.getGameSeed();
 
-        if (gameSeedNumber >= 0 && gameSeedNumber <= 1000) {
+        if (gameSeedNumber >= 0 && gameSeedNumber <= 10000) {
             gameSeedRandomNumberFlag = true;
         }
 
@@ -118,7 +119,6 @@ public class JUnitTest {
 
         // Test Set Value Method
         numberSetValueFlag = false;
-        int temp = numberTable.getPuzzle()[2][2].getValue();
         numberTable.getPuzzle()[2][2].setValue(12);
         int tempForSet = numberTable.getPuzzle()[2][2].getValue();
         if (tempForSet == numberTable.getPuzzle()[2][2].getValue()) {

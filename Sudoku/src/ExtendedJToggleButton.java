@@ -1,12 +1,10 @@
 import javax.swing.JToggleButton;
-
 public class ExtendedJToggleButton extends JToggleButton {
-
     /**
-     *
+     * Extend the JToggleButton class with some of the private variables needed by Sudoku game.
      */
     private static final long serialVersionUID = 1L;
-
+    
     private int rowID;
     private int colID;
     private int boxID;

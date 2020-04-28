@@ -1,6 +1,8 @@
 
 public class Number {
-
+	/**
+	 * Number class helps Sudoku game keep tracking of each number in each cell of Sudoku NumberTable
+	 */
 	private int value;
 	private boolean orig;
 	private int rowID;
@@ -12,12 +14,12 @@ public class Number {
 	private int ifCorrect;
 
 	/**
-	 * Number constructor
-	 * 
-	 * @param value value of the number
-	 * 
-	 * @param init  boolean variable state whether this number is original number or
-	 *              user input number
+	 * Number class constructor
+	 * @param value int, the number value
+	 * @param orig boolean, indicates if the number is original or user input
+	 * @param rowID	int rowID
+	 * @param colID int colID
+	 * @param boxID int boxID
 	 */
 	public Number(int value, boolean orig, int rowID, int colID, int boxID) {
 		this.value = value;
@@ -103,6 +105,11 @@ public class Number {
 		this.ifCorrect = ifCorrect;
 	}
 
+	/**
+	 * public method that checks if two numbers are at the same location
+	 * @param number Number class object
+	 * @return boolean
+	 */
 	public boolean sameLocation(Number number) {
 		if ((this.rowID == number.getRowID()) && (this.colID == number.getColID())
 				&& (this.boxID == number.getBoxID())) {
@@ -112,6 +119,11 @@ public class Number {
 		}
 	}
 
+	/**
+	 * public method that checks if two numbers are equal
+	 * @param number Number class object
+	 * @return boolean
+	 */
 	public boolean equals(Number number) {
 		if ((this.rowID == number.getRowID()) && (this.colID == number.getColID()) && (this.boxID == number.getBoxID())
 				&& this.value == number.getValue()) {

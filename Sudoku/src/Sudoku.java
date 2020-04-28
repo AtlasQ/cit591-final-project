@@ -5,7 +5,11 @@ import java.util.HashMap;
 import java.awt.*;
 
 public class Sudoku extends JFrame implements KeyListener {
+    /**
+     * Sudoku class which stores the game logic and game GUI for the game Sudoku
+     */
 
+    // the following are a series of getters for testing purpose
     public JCheckBoxMenuItem getCheckForMistake() {
         return checkForMistake;
     }
@@ -38,17 +42,18 @@ public class Sudoku extends JFrame implements KeyListener {
         this.currentDifficulty = currentDifficulty;
     }
 
+
     private static final long serialVersionUID = 3517500680629946998L;
     private ExtendedJToggleButton[][] buttonTable = new ExtendedJToggleButton[9][9];
     private ButtonGroup buttonGroup = new ButtonGroup();
     private JPanel buttonPanel = new JPanel();
     private NumberTable numberTable;
-    private int rowIDGlobal = -1;
-    private int colIDGlobal = -1;
-    private int boxIDGlobal = -1;
+    private int rowIDGlobal = -1; // this helps track the cell that user clicks
+    private int colIDGlobal = -1; // this helps track the cell that user clicks
+    private int boxIDGlobal = -1; // this helps track the cell that user clicks
     private String currentDifficulty = "Easy";
     private HashMap<String, Integer> hintChance = new HashMap<String, Integer>();
-    private int hintChanceLeft;
+    private int hintChanceLeft; // this helps track the hints left
     private boolean checkComplience;
     private boolean checkMistake;
     private JCheckBoxMenuItem checkForMistake;
@@ -57,8 +62,11 @@ public class Sudoku extends JFrame implements KeyListener {
     private JButton hint;
     private JButton erase;
 
+    /**
+     * Sudoku class constructor, which holds the major game logic of the Sudoku game
+     */
     public Sudoku() {
-        super("Sudoku - Team 99");
+        super("Sudoku - Team 99"); //window title
         this.hintChance.put("Easy", 10);
         this.hintChance.put("Intermediate", 5);
         this.hintChance.put("Hard", 2);
@@ -93,7 +101,9 @@ public class Sudoku extends JFrame implements KeyListener {
         newGame.add(easy);
         newGame.add(intermediate);
         newGame.add(hard);
-
+        /**
+         * Action listner for newGame menu
+         */
         ActionListener aListener = new ActionListener() {
             public void actionPerformed(ActionEvent He) {
                 JCheckBoxMenuItem option = (JCheckBoxMenuItem) He.getSource();
@@ -111,9 +121,9 @@ public class Sudoku extends JFrame implements KeyListener {
 
             }
         };
-        hard.addActionListener(aListener);
-        easy.addActionListener(aListener);
-        intermediate.addActionListener(aListener);
+        hard.addActionListener(aListener); // adding action listeners
+        easy.addActionListener(aListener); // adding action listeners
+        intermediate.addActionListener(aListener); // adding action listeners
 
         // Create checkBoxGroup for new game menu
         ButtonGroup checkBoxGroup = new ButtonGroup();
@@ -188,7 +198,11 @@ public class Sudoku extends JFrame implements KeyListener {
         this.setVisible(true);
         this.setResizable(false);
     }
-
+    /**
+     * Private helper function isInteger checks if a String object is made of pure Integer
+     * @param s String
+     * @return boolean
+     */
     private static boolean isInteger(String s) {
         try {
             Integer.parseInt(s);
@@ -201,12 +215,18 @@ public class Sudoku extends JFrame implements KeyListener {
         return true;
     }
 
+    /**
+     * Private method undoErrorMarkers will undo all the formatting caused by invalid number input when compared with Sudoku answer
+     */
     private void undoErrorMarkers() {
         Number toUndoErrorMarker = numberTable.getPuzzle()[rowIDGlobal][colIDGlobal];
         numberTable.undoIfMistake(toUndoErrorMarker);
         numberTable.undoIfValid(toUndoErrorMarker);
     }
 
+    /**
+     * The following public methods are implementations of interface KeyListener
+     */
     @Override
     public void keyTyped(KeyEvent e) {
         // Locate the selected cell (toggled toggle button)
@@ -246,6 +266,9 @@ public class Sudoku extends JFrame implements KeyListener {
         // pass
     }
 
+    /**
+     * Private cellFormatting method helps format the cells in NumberTable of the Sudoku game based on the validity of user input nubmers
+     */
     private void cellFormatting() {
         Number number = this.numberTable.getPuzzle()[this.rowIDGlobal][this.colIDGlobal];
         int correctCells = 0;
@@ -273,6 +296,7 @@ public class Sudoku extends JFrame implements KeyListener {
                     }
                 }
                 // Set color for cells with error
+                // Checks for complience (duplicated numbers in rows, cols, and/or boxes)
                 if (checkComplience) {
                     if ((referenceNumber.getRowComplience() != 0) || (referenceNumber.getColComplience() != 0)
                             || (referenceNumber.getBoxComplience() != 0)) {
@@ -282,7 +306,7 @@ public class Sudoku extends JFrame implements KeyListener {
                         }
                     }
                 }
-
+                // Checks for mistakes
                 if (checkMistake) {
                     if (referenceNumber.getIfCorrect() != 0) {
                         button.setBackground(Color.decode("#f7cfd6"));
@@ -303,7 +327,9 @@ public class Sudoku extends JFrame implements KeyListener {
             cleanAllFunction();
         }
     }
-
+    /**
+     * cleanAllFunction that cleans all hints and user inputs from the Sudoku NumberTable
+     */
     private void cleanAllFunction() {
         this.numberTable.copyOriginalPuzzle();
         Number[][] puzzel = this.numberTable.getPuzzle();
@@ -324,11 +350,16 @@ public class Sudoku extends JFrame implements KeyListener {
         }
     }
 
+    /**
+     * hintFunction helps generate hints and put the value into user designated cell of the Sudoku NumberTable
+     */
     private void hintFunction() {
         Number[][] puzzel = this.numberTable.getPuzzle();
+        // if not inital state
         if ((-1 != this.rowIDGlobal) && (-1 != this.colIDGlobal)) {
             if ((!puzzel[this.rowIDGlobal][this.colIDGlobal].getOrig()) && (this.hintChanceLeft > 0)) {
                 this.hintChanceLeft--;
+                // undo error markers
                 undoErrorMarkers();
                 Number[][] answer = this.numberTable.getAnswer();
                 ExtendedJToggleButton button = buttonTable[this.rowIDGlobal][this.colIDGlobal];
@@ -340,7 +371,9 @@ public class Sudoku extends JFrame implements KeyListener {
             }
         }
     }
-
+    /**
+     * eraseFunction helps erase the number of a specificed cell designated by the user
+     */
     private void eraseFunction() {
         if ((-1 != this.rowIDGlobal) && (-1 != this.colIDGlobal)) {
             if (!this.numberTable.getPuzzle()[this.rowIDGlobal][this.colIDGlobal].getOrig()) {
@@ -349,6 +382,7 @@ public class Sudoku extends JFrame implements KeyListener {
                 button.setText("");
                 button.setForeground(Color.BLACK);
                 Number number = new Number(0, false, this.rowIDGlobal, this.colIDGlobal, this.boxIDGlobal);
+                // undo error markers
                 undoErrorMarkers();
                 numberTable.setPuzzle(number);
                 // Change color
@@ -357,6 +391,9 @@ public class Sudoku extends JFrame implements KeyListener {
         }
     }
 
+    /**
+     * newGameFunction helps create new game and format the NumberTalbe
+     */
     private void newGameFunction() {
         if (this.hint != null) {
             this.hint.setEnabled(true);
@@ -373,14 +410,22 @@ public class Sudoku extends JFrame implements KeyListener {
         numberTable = new NumberTable(ngc.getPuzzleS(), ngc.getAnswerS());
 
     }
-
+    
+    /**
+     * drawButtons function helps draw the buttons on the GUI
+     * 
+     * @param buttonGroup ButtonGroup
+     * @param buttonPanel JPanel
+     */
     private void drawButtons(ButtonGroup buttonGroup, JPanel buttonPanel) {
         // Get puzzel from numberTable
         Number[][] puzzel = this.numberTable.getPuzzle();
         // Draw buttons
         for (int rowID = 0; rowID < 9; rowID++) {
             for (int colID = 0; colID < 9; colID++) {
+                // create button object using ExtendedJToggleButton
                 ExtendedJToggleButton button = new ExtendedJToggleButton();
+                // define boarder thickness
                 int borderT = 1;
                 int borderL = 1;
                 int borderB = 1;
@@ -425,7 +470,7 @@ public class Sudoku extends JFrame implements KeyListener {
             }
         }
     }
-
+    // Congratulation pop-up box, this will also call newGameFunction to generate another new game with the current difficulty setting
     private void congratulationFormatting() {
         JOptionPane.showMessageDialog(null, "Congratulations! You have solved the Sudoku puzzle.");
         newGameFunction();

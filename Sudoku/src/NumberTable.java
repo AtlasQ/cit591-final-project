@@ -11,8 +11,8 @@ public class NumberTable {
 	 * Constructor to save puzzle string and answer string read from .csv files to
 	 * 2-dimensional array
 	 * 
-	 * @param puzzleStr
-	 * @param answerStr
+	 * @param puzzleStr  String that includes 81 numbers corresponding to each one of the cells on the NumberTable
+	 * @param answerStr String that includes 81 numbers corresponding to each one of the cells on the NumberTable
 	 */
 	public NumberTable(String puzzleStr, String answerStr) {
 		for (int row = 0; row < 9; row++) {
@@ -44,7 +44,10 @@ public class NumberTable {
 			}
 		}
 	}
-
+	
+	/**
+	 * Public method copyOriginalPuzzle that create a copy of the puzzle that can be used for ClearAll button in Sudoku game
+	 */
 	public void copyOriginalPuzzle() {
 		for (int row = 0; row < 9; row++) {
 			for (int col = 0; col < 9; col++) {
@@ -81,6 +84,12 @@ public class NumberTable {
 		return answer;
 	}
 
+	/**
+	 * Public metod ifMistake is a validator of user input numbers, and stores the
+	 * number of mistakes occured into Number class private variable ifCorrect
+	 * 
+	 * @param number
+	 */
 	public void ifMistake(Number number) {
 		// initialize boolean variable
 		int res = 0;
@@ -93,6 +102,12 @@ public class NumberTable {
 		setPuzzle(number);
 	}
 
+	/**
+	 * Public metod undoIfMistake is a reverse validator of user input numbers, and removes
+	 * the number of mistakes occured into Number class private variable ifCorrect
+	 * 
+	 * @param number
+	 */
 	public void undoIfMistake(Number number) {
 		if (number.getValue() != 0) {
 			number.setIfCorrect(0);
@@ -100,6 +115,14 @@ public class NumberTable {
 		}
 	}
 
+	/**
+	 * Public metod ifValid is a validator of user input numbers, and stores
+	 * the number of conflicts (duplication of numbers in rows, cols, and boxes)
+	 * occured into Number class private variable rowComplience, colComplience, and
+	 * boxComplience
+	 * 
+	 * @param number
+	 */
 	public void ifValid(Number number) {
 		int rowInvalid = 0;
 		int colInvalid = 0;
@@ -150,6 +173,14 @@ public class NumberTable {
 
 	}
 
+	/**
+	 * Public metod ifValid is a reverse validator of user input numbers, and removes
+	 * the number of conflicts (duplication of numbers in rows, cols, and boxes)
+	 * occured into Number class private variable rowComplience, colComplience, and
+	 * boxComplience
+	 * 
+	 * @param number
+	 */
 	public void undoIfValid(Number number) {
 		int rowInvalid = 0;
 		int colInvalid = 0;
