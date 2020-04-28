@@ -10,13 +10,14 @@ public class Number {
 	private int colComplience;
 	private int boxComplience;
 	private int ifCorrect;
+
 	/**
 	 * Number constructor
-	 * @param value
-	 * value of the number
 	 * 
-	 * @param init
-	 * boolean variable state whether this number is original number or user input number
+	 * @param value value of the number
+	 * 
+	 * @param init  boolean variable state whether this number is original number or
+	 *              user input number
 	 */
 	public Number(int value, boolean orig, int rowID, int colID, int boxID) {
 		this.value = value;
@@ -29,7 +30,6 @@ public class Number {
 		this.boxComplience = 0;
 		this.ifCorrect = 0;
 	}
-	
 
 	public int getValue() {
 		return this.value;
@@ -38,7 +38,6 @@ public class Number {
 	public void setValue(int value) {
 		this.value = value;
 	}
-
 
 	public boolean getOrig() {
 		return this.orig;
@@ -72,7 +71,6 @@ public class Number {
 		this.boxID = boxID;
 	}
 
-
 	public int getRowComplience() {
 		return this.rowComplience;
 	}
@@ -80,7 +78,6 @@ public class Number {
 	public void setRowComplience(int rowComplience) {
 		this.rowComplience = rowComplience;
 	}
-
 
 	public int getColComplience() {
 		return this.colComplience;
@@ -90,7 +87,6 @@ public class Number {
 		this.colComplience = colComplience;
 	}
 
-
 	public int getBoxComplience() {
 		return this.boxComplience;
 	}
@@ -98,7 +94,6 @@ public class Number {
 	public void setBoxComplience(int boxComplience) {
 		this.boxComplience = boxComplience;
 	}
-
 
 	public int getIfCorrect() {
 		return this.ifCorrect;
@@ -109,11 +104,20 @@ public class Number {
 	}
 
 	public boolean sameLocation(Number number) {
-		if ((this.rowID == number.getRowID()) && (this.colID == number.getColID()) && (this.boxID == number.getBoxID())) {
+		if ((this.rowID == number.getRowID()) && (this.colID == number.getColID())
+				&& (this.boxID == number.getBoxID())) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public boolean equals(Number number) {
+		if ((this.rowID == number.getRowID()) && (this.colID == number.getColID()) && (this.boxID == number.getBoxID())
+				&& this.value == number.getValue()) {
 			return true;
 		} else {
 			return false;
 		}
 	}
 }
-
